@@ -6,24 +6,17 @@
     </section>
 </template>
 
-<script>
-import sourceData from '@/data.json'
-export default{
-    props: {
+<script setup>
+    import sourceData from '@/data.json'
+    import { computed } from 'vue';
+
+    const props = defineProps({
         id: {type: Number, required: true},
         experienceSlug: {type: String, required: true}
-    },
-    computed: {
-        destination(){
-            return sourceData.destinations.find(
-                destination => destination.id == this.id
-            )
-        },
-        experience(){
-            return this.destination.experiences.find(
-                experience => experience.slug === this.experienceSlug
-            )
-        }
-    }
-}
+    })
+
+    const destination = computed(() => sourceData.destinations.find(destination => destination.id === props.id))
+   
+    const experience = computed(() => destination.value.experiences.find(experience => experience.slug === props.experienceSlug))
+
 </script>

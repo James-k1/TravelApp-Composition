@@ -1,10 +1,10 @@
-<script>
+<script setup>
 import sourceData from '@/data.json' 
-export default{
-  data(){
-    return {destinations: sourceData.destinations}
-  }
-}
+import { reactive } from 'vue';
+
+const destinations = reactive({data: sourceData.destinations})
+
+
 </script>
 
 <template>
@@ -13,7 +13,7 @@ export default{
 
     <div class="destinations">
       
-      <router-link v-for="destination in destinations" :key="destination.id" :to="{name: 'destination.show', params: {id: destination.id, slug: destination.slug}}">
+      <router-link v-for="destination in destinations.data" :key="destination.id" :to="{name: 'destination.show', params: {id: destination.id, slug: destination.slug}}">
       <h2>{{destination.name}}</h2>
       <img :src="`/images/${destination.image}`" :alt="destination.name">
       </router-link>

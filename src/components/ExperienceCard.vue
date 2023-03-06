@@ -6,11 +6,11 @@
         </span>
     </div>
 </template>
-<script>
+<script setup>
 
-export default {
-    props: {
-        experience: {type: Object, required: true}
-    }
-}
+const props = defineProps({
+    experience: {type: Object, required: true}
+
+})
+
 </script>

@@ -1,18 +1,16 @@
-<script>
+<script setup>
 import {RouterLink} from 'vue-router'
-export default {
-    props: {
+import { computed } from 'vue';
+
+    const props = defineProps({
         ...RouterLink.props
-    },
-    computed:{
-        isExternal(){
-            return typeof this.to === 'string' && this.to.startsWith('http')
-        }
-    }
-} 
+    })
+    const isExternal = computed(() => typeof props.to === 'string' && props.to.startsWith('http'))
+    
+
 </script>
 
 <template>
-    <a :href="to" v-if="isExternal"><slot/></a>
+    <a :href="props.to" v-if="isExternal"><slot/></a>
     <router-link v-bind="$props" v-else> <slot/> </router-link>
 </template>

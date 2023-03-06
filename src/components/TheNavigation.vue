@@ -5,7 +5,7 @@
       
     <div class="destinations">
       
-      <AppLink v-for="destination in destinations" :key="destination.id" :to="{name: 'destination.show', params: {id: destination.id, slug: destination.slug}}">
+      <AppLink v-for="destination in destinations.data" :key="destination.id" :to="{name: 'destination.show', params: {id: destination.id, slug: destination.slug}}">
         {{destination.name}}
       </AppLink>
       <AppLink :to="{name: 'protected'}">Dashboard</AppLink>
@@ -15,11 +15,8 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import sourceData from '@/data.json'
-export default {
-  data(){
-    return {destinations: sourceData.destinations}
-  }
-}
+import { reactive } from 'vue';
+const destinations = reactive({data: sourceData.destinations})
 </script>
